@@ -41,4 +41,16 @@ class ExpiringTest : StringSpec({
         }
         expv.shouldBe(1)
     }
+
+    "expired get cleared" {
+
+        var fetchCalled = 0
+        val expv by expiringLazy(Duration.ofSeconds(1)) {
+            fetchCalled += 1
+            fetchCalled
+        }
+        println(expv)
+        delay(5000)
+        println(expv)
+    }
 })

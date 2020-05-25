@@ -1,6 +1,8 @@
 # Kotlin nuts & bolts
 
-Various utilities for kotlin. This library mostly targets the JVM and attempts to pull in as few additional dependencies as possible.
+Personal utility library for kotlin to share reusable code.
+
+This library mostly targets the JVM and attempts to pull in as few additional dependencies as possible.
 
 ## Usage via jitpack 
 
