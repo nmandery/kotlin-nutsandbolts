@@ -9,7 +9,10 @@ internal object UNINITIALIZED_VALUE
 
 /**
  * delegate for a lazy value which expires after a given amount of time. Accessing after that, will
- * result in fn getting called again to refresh the value
+ * result in fn getting called again to refresh the value.
+ *
+ * Expried values will still be kept in memory and will not be garbagecollected before all references to the
+ * delegate are gone.
  *
  * Modelled after the implementation of kotlins `lazy`
  */
@@ -17,7 +20,10 @@ fun <T> expiringLazy(validFor: TemporalAmount, initialize: () -> T) = ExpiringLa
 
 /**
  * a lazy value which expires after a given amount of time. Accessing after that, will
- * result in fn getting called again to refresh the value
+ * result in fn getting called again to refresh the value.
+ *
+ * Expried values will still be kept in memory and will not be garbagecollected before all references to the
+ * delegate are gone.
  *
  * Modelled after the implementation of kotlins `lazy`
  */
