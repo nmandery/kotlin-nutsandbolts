@@ -12,10 +12,10 @@ interface ExpiringLazy {
     fun clearIfBeyond(now: LocalDateTime = LocalDateTime.now()): Boolean
 }
 
-private object ExpringLazyRegistry {
+internal object ExpringLazyRegistry {
     private var expiringLazyList: MutableList<WeakReference<ExpiringLazy>> = mutableListOf()
     private val mutex = Mutex()
-    private var cleanupTask: Deferred<Unit>? = null
+    internal var cleanupTask: Deferred<Unit>? = null
 
     var clearIntervalMillis: Long = 30 * 1000
 
