@@ -1,4 +1,4 @@
-package com.github.nmandery.nutsandbolts
+package net.nmandery.nutsandbolts
 
 import io.kotlintest.matchers.string.shouldStartWith
 import io.kotlintest.shouldBe

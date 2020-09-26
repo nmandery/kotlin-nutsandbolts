@@ -1,4 +1,4 @@
-package com.github.nmandery.nutsandbolts
+package net.nmandery.nutsandbolts
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
@@ -37,7 +37,7 @@ internal object ExpringLazyRegistry {
     }
 
     private suspend fun gcCleanup() {
-        while (this.expiringLazyList.isNotEmpty()) {
+        while (expiringLazyList.isNotEmpty()) {
             delay(clearIntervalMillis)
             clearExpired()
         }
