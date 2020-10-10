@@ -1,4 +1,4 @@
-package net.nmandery.nutsandbolts.coroutines.channels
+package net.nmandery.nutsandbolts.channels
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope

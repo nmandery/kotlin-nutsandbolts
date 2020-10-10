@@ -1,4 +1,4 @@
-package net.nmandery.nutsandbolts.coroutines.channels
+package net.nmandery.nutsandbolts.channels
 
 import io.kotlintest.matchers.numerics.shouldBeGreaterThanOrEqual
 import io.kotlintest.shouldBe
