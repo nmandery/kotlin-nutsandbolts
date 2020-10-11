@@ -2,12 +2,14 @@ package net.nmandery.nutsandbolts.channels
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.toList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class DurationChunkedTest : StringSpec({
     "duration chunked" {
         val incomming = Channel<Int>()
