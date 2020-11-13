@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     java
     `maven-publish`
@@ -5,8 +7,35 @@ plugins {
     id("org.jetbrains.dokka") version "0.10.0"
 }
 
+fun getCommitFromGit(fallback: String = "unknown"): String {
+    return try {
+        val commit = ByteArrayOutputStream().use { os ->
+            exec {
+                commandLine("git", "show", "-s", "--format=%h")
+                standardOutput = os
+            }
+            os.toString("UTF8").lines().firstOrNull() ?: "unknown"
+        }
+        val isDirty = ByteArrayOutputStream().use { os ->
+            exec {
+                commandLine("git", "describe", "--dirty", "--always")
+                standardOutput = os
+            }
+            os.toString("UTF8").lines().firstOrNull()?.endsWith("-dirty") ?: false
+        }
+        if (isDirty) {
+            "${commit}_dirty"
+        } else {
+            commit
+        }
+    } catch (e: Exception) {
+        println("not build from a git repository: ${e.message}")
+        fallback
+    }
+}
+
 group = "net.nmandery"
-version = "1.1-SNAPSHOT"
+version = getCommitFromGit()
 
 repositories {
     jcenter()
@@ -26,10 +55,10 @@ configure<JavaPluginConvention> {
 }
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     test {
         useJUnitPlatform()
