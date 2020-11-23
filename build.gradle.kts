@@ -3,7 +3,7 @@ import java.io.ByteArrayOutputStream
 plugins {
     java
     `maven-publish`
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.20"
     id("org.jetbrains.dokka") version "0.10.0"
 }
 
@@ -44,7 +44,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
     implementation("io.github.microutils:kotlin-logging:1.7.9")
     testImplementation("junit", "junit", "4.12")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
