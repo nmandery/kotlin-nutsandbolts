@@ -33,7 +33,6 @@ fun getVersionFromGit(fallback: String = "unknown"): String {
     }
 }
 
-
 group = "net.nmandery"
 version = getVersionFromGit()
 
@@ -48,17 +47,18 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging:1.7.9")
     testImplementation("junit", "junit", "4.12")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testImplementation(kotlin("reflect"))
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
     test {
         useJUnitPlatform()
@@ -75,7 +75,7 @@ tasks {
 val dokkaJar by tasks.creating(Jar::class) {
     group = JavaBasePlugin.DOCUMENTATION_GROUP
     description = "Assembles Kotlin docs with Dokka"
-    classifier = "javadoc"
+    archiveClassifier.set("javadoc")
     from(tasks.dokka)
 }
 
@@ -87,8 +87,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/nmandery/kotlin-nutsandbolts")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GH_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GH_TOKEN")
             }
         }
         mavenLocal()
